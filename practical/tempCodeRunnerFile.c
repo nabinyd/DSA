@@ -1,0 +1,10 @@
+  // printf("...............deleting from first.......................\n");
+    // displayList();
+    // deletionFromBeg();
+    // displayList();
+    // deletionFromBeg();
+    // displayList();
+    // deletionFromBeg();
+    // displayList();
+    // deletionFromBeg();
+    // displayList();
