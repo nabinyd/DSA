@@ -3,7 +3,6 @@ int fact(int n)
 {
     if (n == 0)
     {
-
         return 1;
     }
     else
@@ -17,8 +16,8 @@ int main()
     int n;
     printf("\nenter the number: ");
     scanf("%d", &n);
-    fact(n);
-    printf("");
-    
+    int r = fact(n);
+    printf("%d", r);
+
     return 0;
 }
