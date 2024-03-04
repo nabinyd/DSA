@@ -2,13 +2,6 @@
 #include <chrono>
 #include <time.h>
 using namespace std;
-void swapp(int *x, int *y)
-{
-    int temp;
-    temp = *x;
-    *x = *y;
-    *y = temp;
-}
 
 void display(int A[], int n)
 {

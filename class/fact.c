@@ -18,6 +18,5 @@ int main()
     scanf("%d", &n);
     int r = fact(n);
     printf("%d", r);
-
     return 0;
 }

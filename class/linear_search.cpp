@@ -1,10 +1,47 @@
 #include <iostream>
-#include <chrono>
-#include <time.h>
 #include <math.h>
 using namespace std;
-
 int merge(int *A, int left, int mid, int right);
+int LinearSearch(int A[], int n, int key)
+{
+    int i, flag = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (A[i] == key)
+        {
+            flag = 1;
+            return i;
+        }
+        cout << A[i] << endl;
+    }
+    if (flag == 0)
+    {
+        return -1;
+    }
+}
+
+int binarySearch(int A[], int l, int r, int key)
+{
+    int m;
+    while (l <= r)
+    {
+        m = floor((l + r) / 2);
+        // cout << "A[" << m << "]: " << A[m] << endl;
+        if (A[m] == key)
+        {
+            return m;
+        }
+        else if (A[m] > key)
+        {
+            r = m - 1;
+        }
+        else
+        {
+            l = m + 1;
+        }
+    }
+    return -1;
+}
 
 void display(int A[], int n)
 {
@@ -22,7 +59,6 @@ void mergeSort(int A[], int l, int r)
     if (l < r)
     {
         m = floor((l + r) / 2);
-        cout << "mid: " << m << endl;
         mergeSort(A, l, m);
         mergeSort(A, m + 1, r);
         merge(A, l, m, r);
@@ -80,21 +116,21 @@ int merge(int *A, int left, int mid, int right)
 
 int main()
 {
-    int A[100000], n, i;
-    cout << "Enter number(n) : ";
+    int A[10000], n, i, key;
+    cout << "Enter n: ";
     cin >> n;
     for (i = 0; i < n; i++)
     {
         A[i] = rand();
     }
-    cout << "Before sorting: " << endl;
-    display(A, n);
-    auto t1 = chrono::high_resolution_clock::now();
-    cout << "After sorting: " << endl;
-    mergeSort(A, 0, n);
-    auto t2 = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::nanoseconds>(t2 - t1);
-    display(A, n);
-    cout << "time: " << duration.count() << endl;
+
+    display(A, n - 1);
+    mergeSort(A, 0, n-1);
+    display(A, n - 1);
+    cout << "\nEnter key: " << endl;
+    cin >> key;
+    int result = binarySearch(A, 0, n - 1, key);
+    result == -1 ? cout << "Key not found." : cout << "Key found at index " << result;
+
     return 0;
 }

@@ -60,18 +60,6 @@ void selectionSort(int A[], int n)
     }
 }
 
-void mergeSort(int A[], int l, int r)
-{
-    int m;
-    if (l < r)
-    {
-        m = floor((l + r) / 2);
-    }
-}
-
-
-
-
 int main()
 {
     int A[100000], n, i;
