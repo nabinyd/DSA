@@ -20,15 +20,6 @@ void display(int A[], int n)
     cout << endl;
 }
 
-// void mergeSort(int A[], int l, int r)
-// {
-//     int m;
-//     if (l < r)
-//     {
-//         m = floor((l + r) / 2);
-//     }
-// }
-
 int partition(int A[], int l, int r)
 {
     int x = l;
@@ -64,6 +55,8 @@ void quickSort(int A[], int l, int r)
         quickSort(A, p + 1, r);
     }
 }
+
+
 int main()
 {
     int A[100000], n, i;

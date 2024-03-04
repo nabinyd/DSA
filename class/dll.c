@@ -131,9 +131,7 @@ void search(int key)
         }
     }
 }
-// void displayList(){
-//     struct cll *
-// }
+
 int main()
 {
     first = NULL;
