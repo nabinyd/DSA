@@ -7,8 +7,9 @@ struct DLL
     struct DLL *next;
     struct DLL *prev;
 };
+int count = 0;
 
-struct DLL *first, *last;
+struct DLL *first = NULL, *last = NULL;
 
 void insertionAtBegining(int element)
 {
@@ -33,6 +34,7 @@ void insertionAtBegining(int element)
             first->prev = newNode;
             first = newNode;
         }
+        count++;
     }
 }
 
@@ -65,6 +67,7 @@ void insertionAtEnd(int element)
             newNode->prev = temp;
             newNode->next = NULL;
         }
+        count++;
     }
 }
 
@@ -83,11 +86,16 @@ void insertionAtPosition(int element, int pos)
         {
             newNode->next = NULL;
             newNode->prev = NULL;
-            newNode = first;
+            first = newNode;
+        }
+        else if (pos > count)
+        {
+            printf("invalidposition");
         }
         else if (pos == 0)
         {
             insertionAtBegining(element);
+            count++;
         }
         else
         {
@@ -101,11 +109,12 @@ void insertionAtPosition(int element, int pos)
             newNode->prev = temp;
             temp->next = newNode;
             temp->next->prev = newNode;
+            count++;
         }
     }
 }
 
-void transverse()
+void traverse()
 {
     struct DLL *temp = first;
     if (first == NULL)
@@ -132,7 +141,8 @@ void deletionAtBegining()
     else if (first->next == NULL)
     {
         printf("%d is going to be deleted", first->data);
-        free(first->data);
+        free(first);
+        count--;
     }
     else
     {
@@ -142,6 +152,7 @@ void deletionAtBegining()
         first = first->next;
         first->prev = NULL;
         free(temp);
+        count--;
     }
 }
 
@@ -150,6 +161,11 @@ void deletionAtPosition(int position)
     if (first == NULL)
     {
         printf("Empty List\n");
+    }
+    else if (position == 0)
+    {
+        deletionAtBegining();
+        count--;
     }
     else
     {
@@ -163,6 +179,7 @@ void deletionAtPosition(int position)
         nextNode = temp->next;
         temp->next = nextNode->next;
         free(nextNode);
+        count--;
     }
 }
 
@@ -175,7 +192,8 @@ void deletionAtEnd()
     else if (first->next == NULL)
     {
         printf("%d is going to be deleted\n", first->data);
-        free(first->data);
+        free(first);
+        count--;
     }
     else
     {
@@ -184,6 +202,7 @@ void deletionAtEnd()
         last = last->prev;
         last->next = NULL;
         free(temp);
+        count--;
     }
 }
 
@@ -216,26 +235,81 @@ void search(int key)
 
 int main()
 {
-    first = NULL;
-    last = NULL;
+    int choice, element, position, key;
 
-    transverse();
-    insertionAtBegining(10);
-    insertionAtBegining(20);
-    insertionAtBegining(30);
-    insertionAtBegining(40);
-    insertionAtBegining(50);
-    transverse();
-    insertionAtEnd(35);
-    insertionAtPosition(32, 2);
-    transverse();
-    insertionAtBegining(5);
-    transverse();
-    deletionAtPosition(2);
-    transverse();
-    deletionAtBegining();
-    transverse();
-    deletionAtEnd();
-    transverse();
-    search(20);
+    do
+    {
+        printf("\n1. Insert element at front");
+        printf("\t2. Insert element at end");
+        printf("\t3. Insert element at position");
+        printf("\t4. Delete element from front");
+        printf("\n5. Delete element from end");
+        printf("\t6. Delete element from position");
+        printf("\t7. search Element");
+        printf("\t8. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            insertionAtBegining(5);
+            insertionAtBegining(6);
+            insertionAtBegining(10);
+            printf("Enter element to insert at beginning: ");
+            scanf("%d", &element);
+            insertionAtBegining(element);
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 2:
+            printf("Enter element to insert at end: ");
+            scanf("%d", &element);
+            insertionAtEnd(element);
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 3:
+            printf("Enter element to insert: ");
+            scanf("%d", &element);
+            printf("Enter position: ");
+            scanf("%d", &position);
+            insertionAtPosition(element, position);
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 4:
+            deletionAtBegining();
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 5:
+            deletionAtEnd();
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 6:
+            printf("Enter position to delete: ");
+            scanf("%d", &position);
+            deletionAtPosition(position);
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 7:
+            printf("Enter element to search: ");
+            scanf("%d", &key);
+            search(key);
+            printf("Total length of list is: %d\n", count);
+            traverse();
+            break;
+        case 8:
+            printf("Exiting program...\n");
+            break;
+        default:
+            printf("Invalid choice! Please enter a number between 1 and 9.\n");
+        }
+
+    } while (choice != 8);
+
+    return 0;
 }

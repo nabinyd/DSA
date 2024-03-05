@@ -12,7 +12,6 @@ void display(int A[], int n)
     {
         cout << A[i] << " ";
     }
-
     cout << endl;
 }
 

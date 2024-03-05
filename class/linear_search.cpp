@@ -1,7 +1,7 @@
 #include <iostream>
 #include <math.h>
 using namespace std;
-int merge(int *A, int left, int mid, int right);
+
 int LinearSearch(int A[], int n, int key)
 {
     int i, flag = 0;
@@ -12,7 +12,6 @@ int LinearSearch(int A[], int n, int key)
             flag = 1;
             return i;
         }
-        cout << A[i] << endl;
     }
     if (flag == 0)
     {
@@ -26,7 +25,6 @@ int binarySearch(int A[], int l, int r, int key)
     while (l <= r)
     {
         m = floor((l + r) / 2);
-        // cout << "A[" << m << "]: " << A[m] << endl;
         if (A[m] == key)
         {
             return m;
@@ -53,84 +51,64 @@ void display(int A[], int n)
     cout << endl;
 }
 
-void mergeSort(int A[], int l, int r)
+void insertionSort(int A[], int n)
 {
-    int m;
-    if (l < r)
+    int i;
+    int j;
+    int temp;
+    for (i = 0; i < n; i++)
     {
-        m = floor((l + r) / 2);
-        mergeSort(A, l, m);
-        mergeSort(A, m + 1, r);
-        merge(A, l, m, r);
-    }
-}
-
-int merge(int *A, int left, int mid, int right)
-{
-    int B[1000];
-    int i, j, k;
-    i = left;
-    j = mid + 1;
-    k = left;
-
-    while (i <= mid && j <= right)
-    {
-        if (A[i] <= A[j])
+        j = i - 1;
+        temp = A[i];
+        while (j >= 0 && temp < A[j])
         {
-            B[k] = A[i];
-            i++;
+            A[j + 1] = A[j];
+            j = j - 1;
         }
-        else
-        {
-            B[k] = A[j];
-            j++;
-        }
-        k++;
+        A[j + 1] = temp;
     }
-
-    if (i > mid)
-    {
-        while (j <= right)
-        {
-            B[k] = A[j];
-            j++;
-            k++;
-        }
-    }
-    else
-    {
-        while (i <= mid)
-        {
-            B[k] = A[i];
-            i++;
-            k++;
-        }
-    }
-
-    for (k = left; k <= right; k++)
-    {
-        A[k] = B[k];
-    }
-    return A[1000];
 }
 
 int main()
 {
-    int A[10000], n, i, key;
-    cout << "Enter n: ";
-    cin >> n;
-    for (i = 0; i < n; i++)
+    int choice;
+    do
     {
-        A[i] = rand();
-    }
-
-    display(A, n - 1);
-    mergeSort(A, 0, n-1);
-    display(A, n - 1);
-    cout << "\nEnter key: " << endl;
-    cin >> key;
-    int result = binarySearch(A, 0, n - 1, key);
-    result == -1 ? cout << "Key not found." : cout << "Key found at index " << result;
-
+        int A[100000], n, i, key, result;
+        cout << "Enter number(n) : ";
+        cin >> n;
+        for (i = 0; i < n; i++)
+        {
+            A[i] = rand();
+        }
+        cout << "\nEnter key: " << endl;
+        cin >> key;
+        cout << "1. linear search";
+        cout << "\t2. Binary Search";
+        cout << "\t3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            result = LinearSearch(A, n - 1, key);
+            display(A, n);
+            result == -1 ? cout << "Key not found.\n" : cout << "Key found at index " << result << endl;
+            break;
+        case 2:
+            display(A, n);
+            insertionSort(A, n);
+            display(A, n);
+            result = binarySearch(A, 0, n - 1, key);
+            result == -1 ? cout << "Key not found.\n" : cout << "Key found at index " << result << endl;
+            break;
+        case 3:
+            cout << "Exit" << endl;
+            break;
+        default:
+            cout << "Invalid Choice" << endl;
+            break;
+        }
+    } while (choice != 3);
     return 0;
 }

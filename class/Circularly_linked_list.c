@@ -99,12 +99,6 @@ void insertAtPosition(int element, int pos)
     }
 }
 
-/**
- * Deletes the first node from a circularly linked list.
- * If the list is empty, it prints "Empty list".
- * If the list has only one node, it frees the memory and sets the first pointer to NULL.
- * If the list has more than one node, it updates the pointers and frees the memory of the first node.
- */
 void deleteFromBegining()
 {
     if (first == NULL)
@@ -199,7 +193,7 @@ void traverse()
 {
     if (first == NULL)
     {
-        printf("\nEmpty List.");
+        printf("\nEmpty List.\n");
     }
     else
     {
@@ -217,23 +211,65 @@ void traverse()
 int main()
 {
     first = NULL;
-    insertionAtBegining(10);
-    insertionAtBegining(20);
-    insertionAtEnd(35);
-    traverse();
-    insertionAtBegining(30);
-    insertionAtBegining(40);
-    insertionAtBegining(50);
-    traverse();
-    insertAtPosition(60, 2);
-    insertAtPosition(27, 4);
-    traverse();
-    deleteFromBegining();
-    traverse();
-    deletionFromEnd();
-    traverse();
-    deleteFromPosition(0);
-    traverse();
-    printf("Total length of list is: %d\n", count);
+    int choice;
+    do
+    {
+        printf("\n1. Insert element at front");
+        printf("\t2. Insert element at end");
+        printf("\t3. Insert element at position");
+        printf("\t4. Delete element from front");
+        printf("\n5. Delete element from end");
+        printf("\t6. Delete element from position");
+        printf("\t7. Display Element");
+        printf("\t8. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            insertionAtBegining(10);
+            insertionAtBegining(20);
+            insertionAtBegining(30);
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 2:
+            insertionAtEnd(40);
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 3:
+            insertAtPosition(25, 2);
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 4:
+            deleteFromBegining();
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 5:
+            deletionFromEnd();
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 6:
+            deleteFromPosition(2);
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 7:
+            traverse();
+            printf("Total length of list is: %d\n", count);
+            break;
+        case 8:
+            printf("Exit\n");
+            break;
+        default:
+            printf("Invalid Choice\n");
+            break;
+        }
+
+    } while (choice != 8);
     return 0;
 }
