@@ -7,9 +7,9 @@ import java.util.Arrays;
 public class main {
 
     public static void main(String[] args) {
-        int[] arr = { 55, 2, 6, 8, 26 };
-        selection(arr);
-        System.out.println(Arrays.toString(arr));
+        // int[] arr = { 55, 2, 6, 8, 26 };
+        // selection(arr);
+        // System.out.println(Arrays.toString(arr));
 
     }
     /* -------------------------------- insertion ------------------------------- */

@@ -231,11 +231,11 @@ int main()
         printf("\n1. Insert element at front");
         printf("\t2. Insert element at end");
         printf("\t3. Insert element at position");
-        printf("\n4. Delete element from front");
+        printf("\t4. Delete element from front");
         printf("\n5. Delete element from end");
-        printf("\n6. Delete element from position");
-        printf("\n7. Display Element");
-        printf("\n8. Exit");
+        printf("\t6. Delete element from position");
+        printf("\t7. Display Element");
+        printf("\t8. Exit");
         printf("\nEnter your choice: ");
         scanf("%d", &choice);
         switch (choice)
